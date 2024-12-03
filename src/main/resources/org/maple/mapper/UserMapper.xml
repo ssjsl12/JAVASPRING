@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.maple.mapper.UserMapper">
+
+	<select id="getList" resultType="org.maple.domain.User">
+		select * from user
+	</select>
+
+
+	<insert id="insertUser" parameterType="org.maple.domain.User">
+		INSERT INTO user (user_id,
+		user_pwd, name)
+		VALUES (#{user_id}, #{user_pwd}, #{name})
+	</insert>
+
+	<select id="comparisonId" parameterType="map" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM user
+		WHERE user_id = #{user_id}
+		AND user_pwd = #{user_pwd}
+	</select>
+
+	<update id="updateUserCash" parameterType="map">
+
+		update
+		user
+		set cash = cash + #{cash}
+		where user_no = #{userno}
+
+	</update>
+	
+	<select id="getUser" parameterType="String"
+		resultType="org.maple.domain.User">
+		SELECT *
+		FROM user
+		WHERE user_id = #{user_id}
+	</select>
+
+	<select id = "getUserInt" parameterType="int" resultType = "org.maple.domain.User">
+	
+		SELECT *
+		FROM user
+		WHERE user_no = #{user_no}
+	
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.maple.mapper.WishlistMapper">
+
+	<select id="getUserWishList"
+		resultType="org.maple.domain.Wishlist">
+
+		SELECT
+		w.fkexitem_no AS fkexitem_no,
+		e.price AS price,
+		e.exDate AS exDate,
+		i.name AS name,
+		i.url AS url
+		FROM
+		Wishlist w
+		JOIN
+		ExchangeItem e
+		ON
+		w.fkexitem_no = e.exitem_no
+		JOIN
+		ItemInfo i
+		ON
+		e.fkinfo_no = i.info_no
+		WHERE
+		w.fkuser_no = #{user_no}
+
+
+
+	</select>
+
+	<insert id="insert" parameterType="map">
+
+		insert into wishlist (fkuser_no, fkexitem_no) values
+		(#{userno} , #{exchageItemNo})
+
+	</insert>
+
+	<delete id="delete">
+
+		DELETE FROM wishlist WHERE fkuser_no = #{userno} AND fkexitem_no =
+		#{exchageItemNo}
+
+	</delete>
+
+
+	<delete id="autoDelete">
+
+		delete from wishlist where fkexitem_no = #{fkexitem_no}
+
+	</delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

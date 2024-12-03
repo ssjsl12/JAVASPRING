@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.maple.mapper.ExchangeItemMapper">
+
+	<select id="getList" resultType="org.maple.domain.ExchangeItem">
+
+		 SELECT e.*, i.name, i.url
+    		FROM ExchangeItem e
+    		JOIN ItemInfo i ON e.fkinfo_no = i.info_no
+
+	</select>
+
+
+	<update id="updateState" parameterType="int">
+		UPDATE ExchangeItem
+		SET state = 1
+		WHERE exitem_no = #{exitem_no}
+	</update>
+
+	<update id="updateExchangeItemCount" parameterType="map">
+		UPDATE
+		ExchangeItem
+		SET COUNT = COUNT - #{purchaseAmount}
+		WHERE exitem_no =
+		#{exchangeItemNo}
+	</update>
+	
+	<select id = "getitem" resultType="org.maple.domain.ExchangeItem">
+	
+		SELECT * FROM exchangeitem WHERE exitem_no = #{exitem_no}
+		
+	</select>
+	
+	  <insert id="insertItem" parameterType="org.maple.domain.ExchangeItem">
+        INSERT INTO ExchangeItem (price, count, fkuser_no, exDate, state ,fkinfo_no)
+        VALUES (#{price}, #{count}, #{fkuser_no}, sysdate() , 0 , #{fkinfo_no})
+    </insert>
+	
+	<select id ="getUserItem">
+	
+		SELECT e.*, i.url FROM exchangeItem e join Iteminfo i on e.fkinfo_no = i.info_no
+		 where fkuser_no = #{fkuser_no}
+	
+	</select>
+	
+
+	<delete id ="deleteItem">
+	
+		DELETE from exchangeitem WHERE exitem_no = #{exitem_no};
+	
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

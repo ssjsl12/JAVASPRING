@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+<style> /* 전체 레이아웃 */
+ .main {
+	padding: 10px 20px;
+}
+
+/* 헤더 스타일 */
+.header {
+	justify-content: space-between; /* 양 옆에 공간을 분배 */
+	align-items: center; /* 세로 중앙 정렬 */
+	background-color: #333;
+	color: #fff;
+	display: flex;
+}
+
+
+.search input {
+	padding: 5px 10px;
+	font-size: 14px;
+	border-radius: 5px;
+	border: none;
+}
+
+/* 유저 정보 및 로그아웃 버튼 */
+.user-info {
+	display: flex;
+	align-items: center; /* 세로 중앙 정렬 */
+	justify-content: flex-end; /* 오른쪽 끝에 배치 */
+}
+
+/* 유저 정보 텍스트 */
+.user-info .user-name, .user-info .cash {
+	margin-right: 20px;
+	font-size: 14px;
+}
+
+/* 로그아웃 버튼 */
+.user-info button {
+	padding: 8px 12px;
+	font-size: 14px;
+	background-color: #f44336;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.logout {
+	margin: 15px;
+}
+
+.user-info button:hover {
+	background-color: #d32f2f;
+}
+</
+style
+>

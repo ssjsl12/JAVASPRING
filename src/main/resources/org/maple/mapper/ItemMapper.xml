@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.maple.mapper.ItemMapper">
+  
+  
+  
+  
+  
+  <select id="getUserItemList" resultType="org.maple.domain.Item">
+
+  	 SELECT e.*, i.name, i.url
+    		FROM item e
+    		JOIN ItemInfo i ON e.fkinfo_no = i.info_no
+    		where fkuser_no =#{user_no}
+  	
+  </select>
+  
+  <select id="getUserItem">
+  
+  	SELECT * from item WHERE fkuser_no = #{fkuser_no} AND fkinfo_no = #{fkinfo_no}
+  
+  </select>
+  
+  <update id = "updateItem"  parameterType="int">
+  
+    Update  item SET COUNT = #{count}  WHERE fkuser_no = #{fkuser_no} AND fkinfo_no = #{fkinfo_no}	
+  
+  </update>
+  
+
+	<insert id = "insertItem" parameterType="int">
+	
+		INSERT INTO Item (fkuser_no, COUNT ,fkinfo_no) VALUES 
+		(#{fkuser_no} , #{count} , #{fkinfo_no})
+		
+	
+	</insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

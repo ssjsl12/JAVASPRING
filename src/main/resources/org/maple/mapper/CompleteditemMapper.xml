@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.maple.mapper.CompleteditemMapper">
+
+
+	<select id="getList" resultType="org.maple.domain.Completeditem">
+
+		SELECT e.*, i.name, i.url
+		FROM
+		completeditem e
+		JOIN ItemInfo i ON e.fkinfo_no = i.info_no
+
+	</select>
+
+	<select id="getUserList"
+		resultType="org.maple.domain.Completeditem">
+
+		SELECT
+		c.fkexitem_no AS fkexitem_no,
+		c.price AS price,
+		c.ciDate AS ciDate,
+		c.count AS COUNT,
+		c.getprice AS getprice,
+		i.name AS name,
+		i.url AS url,
+		e.fkuser_no AS fkuser_no
+		FROM
+		Completeditem c
+		JOIN
+		ExchangeItem e ON c.fkexitem_no = e.exitem_no
+		JOIN
+		ItemInfo i ON c.fkinfo_no = i.info_no
+		WHERE
+		e.fkuser_no = #{fkuser_no}
+
+	</select>
+
+
+	<insert id="insertcitem">
+
+		INSERT INTO completeditem(fkexitem_no, fkinfo_no,
+		COUNT, price , cidate)
+		VALUES(#{fkexitem_no},
+		#{fkinfo_no},#{count},#{price},SYSDATE())
+
+	</insert>
+
+	<update id="updatecitem">
+
+		update completeditem set getprice = 1 where fkexitem_no = #{fkexitem_no}
+
+	</update>
+
+
+</mapper>
+  
